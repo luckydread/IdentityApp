@@ -1,0 +1,52 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Home page";
+}
+
+<head>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+</head>
+<div class="text-center">
+    <h1 class="display-4">Welcome</h1>
+    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+</div>
+
+<div>
+    <canvas id="myChart"></canvas>
+</div>
+
+@section Scripts{
+    <script>
+        const labels = [
+            'January',
+            'February',
+            'March',
+            'April',
+            'May'
+        ];
+
+        const data ={
+            labels: labels,
+            datasets:[
+                {
+                    label: "Revenue",
+                    backgroundColor:"rgb(255,99,132)",
+                    borderColor: "rgb(255,99,132)",
+                    data: @Json.Serialize(Model.revenue)
+                }
+            ]
+        }
+
+        const config = {
+            type: 'line',
+            data: data,
+            option :{ }
+        }
+
+        const myChart = new Chart(
+            document.getElementById('myChart'),
+            config
+        )
+    </script>
+}
